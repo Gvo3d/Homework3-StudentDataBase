@@ -1,6 +1,6 @@
 package App;
 
-public class Student implements Comparable{
+public class Student {
     public String name;
     public String surname;
     public int group;
@@ -51,16 +51,15 @@ public class Student implements Comparable{
         this.mark = mark;
     }
 
-    @Override
-    public int compareTo(Student comparablestudent) {
+    public boolean compareTo(Student comparablestudent) {
         int thissurname, hissurname;
         char thissurnamechar = this.getComparableSurname();
         char hissurnamechar = comparablestudent.getComparableSurname();
         thissurname = (int) thissurnamechar;
         hissurname = (int) hissurnamechar;
     if (thissurname>hissurname) {
-        return 1;
-    } else return 0;
+        return true;
+    } else return false;
     }
 
     @Override
