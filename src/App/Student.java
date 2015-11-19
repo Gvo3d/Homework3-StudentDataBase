@@ -35,10 +35,11 @@ public class Student implements Comparable{
         return surname;
     }
 
-    public String getComparableSurname() {
-        String firstletter;
-        firstletter = String.valueOf(surname.charAt(0));
-        return surname;
+    public char getComparableSurname() {
+        String upperfirstletter;
+        upperfirstletter = String.valueOf(surname.charAt(0));
+        upperfirstletter = upperfirstletter.toUpperCase();
+        return upperfirstletter.charAt(0);
     }
 
     public void setSurname(String surname) {
@@ -55,6 +56,9 @@ public class Student implements Comparable{
 
     @Override
     public int compareTo(Student comparablestudent) {
+        char thissurname = this.getComparableSurname();
+        char hissurname =comparablestudent.getComparableSurname();
+
         return 0;
     }
 
