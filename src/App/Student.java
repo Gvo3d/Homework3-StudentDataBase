@@ -3,19 +3,19 @@ package App;
 /**
  * Created by Gvozd on 19.11.2015.
  */
-public class Student {
-    private String name;
-    private String surname;
-    private byte group;
-    private byte mark[];
+public class Student implements Comparable{
+    public String name;
+    public String surname;
+    public int group;
+    public int mark[];
 
-    public Student(String name, String surname, byte group) {
+    public Student(String name, String surname, int group) {
         this.name = name;
         this.surname = surname;
         this.group = group;
     }
 
-    public byte getGroup() {
+    public int getGroup() {
         return group;
     }
 
@@ -35,15 +35,33 @@ public class Student {
         return surname;
     }
 
+    public String getComparableSurname() {
+        String firstletter;
+        firstletter = String.valueOf(surname.charAt(0));
+        return surname;
+    }
+
     public void setSurname(String surname) {
         this.surname = surname;
     }
 
-    public byte getMark(int markindex) {
+    public int getMark(int markindex) {
         return mark[markindex];
     }
 
-    public void setMark(byte[] mark) {
+    public void setMark(int[] mark) {
         this.mark = mark;
     }
+
+    @Override
+    public int compareTo(Student comparablestudent) {
+        return 0;
+    }
+
+    public String toString(){
+        String resultofstudent = surname + " " + name + " from " + group + " gr";
+
+        return
+    }
+
 }
