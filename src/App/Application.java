@@ -1,5 +1,6 @@
 package App;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -17,14 +18,22 @@ public class Application {
         students.add( new Student("Denis", "Bondar", 2) );
         students.add( new Student("Denis", "Chumachenko", 2) );
 
-        Collections.sort(students);
 
         for(Student str: students){
             System.out.println(str.getComparableSurname());
         }
 
+        for(int i=0; i< students.size(); i++) System.out.println(students.toArray()[i]);
+
     }
 
+    public static void SortingStudents(Array target[]){
+        int arraylength = target.length;
+        String sort[] = new String[arraylength];
+        System.arraycopy(target, 0, sort, 0, 1);
+
+
+    }
 
 
 }
