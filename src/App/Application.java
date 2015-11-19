@@ -27,11 +27,23 @@ public class Application {
 
     }
 
-    public static void SortingStudents(Array target[]){
-        int arraylength = target.length;
-        String sort[] = new String[arraylength];
-        System.arraycopy(target, 0, sort, 0, 1);
+    public static void SortingStudents(){
+        int arraylength = students.size();
+        for (int i = 0; i < students.size()-1; i++){
+            for (int j = 0; j<students.size() -i-1; j++){
+                boolean comparingstudents = students.sort(students.a);
 
+
+                if (a[j]<a[j+1]) {
+                    bubble = a[j+1];
+                    a[j+1]=a[j];
+                    a[j]=bubble;
+                }
+            }
+        }
+
+        for (int i=0; i<a.length; i++)
+            System.out.println(a[i]);
 
     }
 
