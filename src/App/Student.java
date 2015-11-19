@@ -1,8 +1,5 @@
 package App;
 
-/**
- * Created by Gvozd on 19.11.2015.
- */
 public class Student implements Comparable{
     public String name;
     public String surname;
@@ -56,16 +53,20 @@ public class Student implements Comparable{
 
     @Override
     public int compareTo(Student comparablestudent) {
-        char thissurname = this.getComparableSurname();
-        char hissurname =comparablestudent.getComparableSurname();
-
-        return 0;
+        int thissurname, hissurname;
+        char thissurnamechar = this.getComparableSurname();
+        char hissurnamechar = comparablestudent.getComparableSurname();
+        thissurname = (int) thissurnamechar;
+        hissurname = (int) hissurnamechar;
+    if (thissurname>hissurname) {
+        return 1;
+    } else return 0;
     }
 
-    public String toString(){
+    @Override
+    public String toString() {
         String resultofstudent = surname + " " + name + " from " + group + " gr";
-
-        return
+        return resultofstudent;
     }
 
 }
