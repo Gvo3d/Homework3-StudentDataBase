@@ -62,9 +62,8 @@ public class Student {
     } else return false;
     }
 
-    @Override
     public String toString() {
-        String resultofstudent = surname + " " + name + " from " + group + " gr";
+        String resultofstudent = surname + " " + name + " from " + group + "gr";
         return resultofstudent;
     }
 
