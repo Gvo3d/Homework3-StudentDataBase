@@ -7,9 +7,9 @@ public class Group {
     private Student[] students = new Student[1];
 
     public Group(int groupId) {
-        groupId = this.groupId;
-        filledUpTo = 0;
-        ChangeArrayLength(10);
+        this.groupId = groupId;
+        this.filledUpTo = 0;
+        this.ChangeArrayLength(10);
     }
 
     public void ChangeArrayLength(int newlength){
@@ -22,14 +22,15 @@ public class Group {
             newstudents[i] = new Student ("", "", groupId);
         }
         students = newstudents;
-        length = students.length;
+        this.length = students.length;
     }
 
     public void Add (String name, String surname){
         if (length>filledUpTo) {
             students[filledUpTo+1] = new Student (name, surname, groupId);
             filledUpTo++;
-        } else ChangeArrayLength(length+1);
+        } else { ChangeArrayLength(length+1);
+        this.Add(name, surname); }
     }
 
     public String Student(int studentindex){
@@ -37,6 +38,11 @@ public class Group {
     }
 
     public int FilledUpTo(){
-        return filledUpTo;
+        return this.filledUpTo;
     }
+
+    public int IdShow(){
+        return this.groupId;
+    }
+
 }
