@@ -12,6 +12,9 @@ public class Student {
         this.group = group;
     }
 
+    public Student() {
+    }
+
     public int getGroup() {
         return group;
     }
@@ -47,6 +50,10 @@ public class Student {
         return mark[markindex];
     }
 
+    public int[] getMarks(int markindex) {
+    return this.mark ;
+    }
+
     public void setMark(int[] mark) {
         this.mark = mark;
     }
@@ -63,8 +70,7 @@ public class Student {
     }
 
     public String toString() {
-        String resultofstudent = surname + " " + name + " from " + group + "gr";
-        return resultofstudent;
+        return  ""+surname + " " + name + " from " + group + " group";
     }
 
 }

@@ -4,7 +4,7 @@ public class Group {
     private int groupId;
     public int length=1;
     private int filledUpTo;
-    private Student[] students = new Student[1];
+    protected Student[] students = new Student[1];
 
     public Group(int groupId) {
         this.groupId = groupId;
@@ -19,7 +19,7 @@ public class Group {
         newstudents[i]=students[i];
         }
         for (int i = students.length; i<newlength; i++) {
-            newstudents[i] = new Student ("", "", groupId);
+            newstudents[i] = new Student ();
         }
         students = newstudents;
         this.length = students.length;
@@ -33,8 +33,10 @@ public class Group {
         this.Add(name, surname); }
     }
 
-    public String Student(int studentindex){
-        return students[studentindex].toString();
+    public String StudentToString(int studentindex){
+        if (this.students[studentindex].getGroup() != 0) {
+            return students[studentindex].toString();
+        } else return "";
     }
 
     public int FilledUpTo(){
@@ -43,6 +45,31 @@ public class Group {
 
     public int IdShow(){
         return this.groupId;
+    }
+
+    public void StudentDelete(int studentnumber) {
+        this.students[studentnumber] = null;
+        for (int i=0; i<students.length-1; i++){
+            if (students[i].getGroup() == 0){
+                students[i] = students[i+1];
+                students[i+1].group = 0;
+            } students[length-1] = students[length];
+            students[length].group = 0;
+        }
+        for (int i =0; i<students.length; i++){
+            if (students[i].getGroup() == 0) {
+                ChangeArrayLength(i-1);
+            }
+        }
+    }
+
+    public String Find(String searcheablesurname) {
+        for (int i =0; i<=this.filledUpTo; i++) {
+            if (students[i].getSurname().equals(searcheablesurname)) {
+                return students[i].toString();
+            }
+        }
+        return "";
     }
 
 }
