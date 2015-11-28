@@ -17,6 +17,7 @@ public class Application {
         grouparray[0].Add("Benis", "Fakimov");
         grouparray[0].Add("Tenis", "Dakimov");
 
+
         grouparray[1].Add("Konstantin", "Kirilyk");
         grouparray[1].Add("Ponstantin", "Lirilyk");
         grouparray[1].Add("Ronstantin", "Pirilyk");
@@ -25,21 +26,28 @@ public class Application {
         grouparray[1].Add("Wonstantin", "Zirilyk");
         grouparray[1].Add("Tonstantin", "Firilyk");
 
+        for (int i=0; i<=grouparray[0].FilledUpTo(); i++) grouparray[0].setStudentMarks(i, new int[]{1, 2, 3, 4, 5, 6, 7});
+        for (int i=0; i<=grouparray[1].FilledUpTo(); i++) grouparray[1].setStudentMarks(i, new int[]{5, 2, 3, 8, 5, 9, 7});
+
+
         System.out.println("StudentDataBase");
         System.out.println("Made by Denis Yakimov for Hillel School");
         System.out.println();
         System.out.println("Commands: ");
         System.out.println("\"a\"-add a student to a group");
-        System.out.println("\"d\"-delete a student from a group");
+        System.out.println("\"h\"-delete a student from a group");
         System.out.println("\"f\"-find a student from a group");
         System.out.println("\"n\"-create a group");
         System.out.println("\"c\"-clear a group");
+        System.out.println("\"d\"-delete a group");
         System.out.println("\"l\"-show group list");
+        System.out.println("\"s\"-show group students list");
         System.out.println("\"j\"-join two groups");
         System.out.println("\"e\"-show if groups are equals");
         System.out.println("\"g\"-search for a number of students in group");
         System.out.println("\"q\"-quit program");
 
+        while (true) {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.next();
 
@@ -47,7 +55,7 @@ public class Application {
             case "a":
                 AddStudent();
                 break;
-            case "d":
+            case "h":
                 DeleteStudent();
                 break;
             case "f":
@@ -59,25 +67,31 @@ public class Application {
             case "c":
                 GroupClear();
                 break;
+            case "d":
+                GroupDelete(GetGroupID());
+                break;
             case "l":
                 GroupList();
+                break;
+            case "s":
+                GroupStudentsList();
                 break;
             case "j":
                 GroupJoin();
                 break;
             case "e":
-
+                System.out.println(GroupComparsion());
                 break;
             case "g":
-
+                MassSearch();
                 break;
             case "q":
-
+                System.exit(0);
                 break;
 
 
             default: {
-
+            }
             }
         }
 
@@ -125,6 +139,14 @@ public class Application {
 
     }
 
+    private static void GroupStudentsList() {
+        int group = GetGroupID();
+            for (int i=1; i<grouparray[group].length; i++) {
+                System.out.println(grouparray[group].StudentToString(i));
+            }
+
+    }
+
     public static void GroupCreate() {
         if (groupcount >= grouparray.length) {
             Group newgroups[] = new Group[groupcount + 1];
@@ -159,10 +181,6 @@ public class Application {
 
     public static void GroupDelete(int groupnumber) {
         grouparray[groupnumber] = null;
-    }
-
-    public static void List(int groupnumber) {
-        for (int i=1; i<=grouparray[groupnumber].FilledUpTo(); i++) System.out.println(grouparray[groupnumber].StudentToString(i));
     }
 
     public static int GetGroupID() {
@@ -240,7 +258,7 @@ public class Application {
 
     public static void GroupList () {
         for (int i=0; i<grouparray.length; i++) {
-            System.out.println("Group "+grouparray[i].IdShow()+" with "+grouparray[i].length+" students");
+            System.out.println("Group "+i+" with "+grouparray[i].FilledUpTo()+" students");
         }
     }
 
@@ -259,6 +277,42 @@ public class Application {
         } else System.out.println("Group ID error!");
     }
 
+    public static String GroupComparsion() {
+        System.out.println("Enter 2 group IDs.");
+        int group = GetGroupID();
+        int group2 = GetGroupID();
+        group=GroupSearch(group);
+        group2=GroupSearch(group2);
+        for (int i=0; i<grouparray[group].length; i++) {
+            if (!(grouparray[group].students[i].equals(grouparray[group2].students[i]))) {
+                return "Groups are not equal!";
+            }
+        }
+        return "Groups are equal!";
+    }
 
+    public static void StudentCompare(int group, String surname) {
+        String searcheable = grouparray[group].Find(surname);
+        if (!(searcheable.equals(""))) {
+            System.out.println("Student "+surname+" is at "+ group+ " group!");
+        }
+    }
 
+    public static void MassSearch() {
+        String search="";
+        int i=0;
+        String arrayofstudents[] = new String[30];
+        System.out.println("Enter student surnames(up to 30), end your input with \"q\" symbol.");
+        while (!(search.equals("q"))) {
+            Scanner scanner = new Scanner(System.in);
+            search = scanner.nextLine();
+            arrayofstudents[i]=search;
+            i++;
+        }
+        for (int j=0; j<arrayofstudents.length; j++) {
+            for (int m=0; m<grouparray.length; m++) {
+                StudentCompare(m, arrayofstudents[j]);
+            }
+        }
+    }
 }
