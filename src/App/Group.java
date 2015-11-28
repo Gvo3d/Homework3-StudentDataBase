@@ -39,6 +39,16 @@ public class Group {
         } else return "";
     }
 
+    public int[] getStudentMarks (int studentid) {
+        int resultarray[];
+        resultarray = this.students[studentid].mark;
+        return resultarray;
+    }
+
+    public void setStudentMarks (int studentid, int[] newmarks) {
+        this.students[studentid].mark=newmarks;
+    }
+
     public int FilledUpTo(){
         return this.filledUpTo;
     }

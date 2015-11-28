@@ -57,13 +57,13 @@ public class Application {
                 GroupCreate();
                 break;
             case "c":
-
+                GroupClear();
                 break;
             case "l":
-
+                GroupList();
                 break;
             case "j":
-
+                GroupJoin();
                 break;
             case "e":
 
@@ -146,6 +146,7 @@ public class Application {
         int group = GetGroupID();
         if (GroupSearch(group) != 0) {
             grouparray[GroupSearch(group)]= null;
+            grouparray[GroupSearch(group)].length=0;
             System.out.println("Group cleared!");
         } else System.out.println("No such group!");
     }
@@ -171,6 +172,7 @@ public class Application {
                         Scanner in = new Scanner(System.in);
             if (in.hasNextInt()) {
                 number = in.nextInt();
+                number=GroupSearch(number);
             } else System.out.println("Error in data input, reinput number!");
         }
         return number;
@@ -181,9 +183,11 @@ public class Application {
         for (int i = 0; i<groupcount; i++) {
             if (grouparray[i].IdShow() == group) {
                 result = i;
-            } else System.out.println("This group is not exist");
+            } else {
+                System.out.println("This group is not exist");
+            return 0;}
             }
-        return result;
+            return result;
         }
 
     public static String InputName (){
@@ -232,6 +236,27 @@ public class Application {
         if (searcheable.equals("")) {
             System.out.println("No such student at "+ group+ " group!");
         } else System.out.println(searcheable);
+    }
+
+    public static void GroupList () {
+        for (int i=0; i<grouparray.length; i++) {
+            System.out.println("Group "+grouparray[i].IdShow()+" with "+grouparray[i].length+" students");
+        }
+    }
+
+    public static void GroupJoin() {
+        System.out.println("Enter 2 group IDs, first one would be extended with second one students.");
+        int group = GetGroupID();
+        int group2 = GetGroupID();
+        group=GroupSearch(group);
+        group2=GroupSearch(group2);
+        if ((group !=0) && (group2 !=0)) {
+            grouparray[group].ChangeArrayLength(grouparray[group].length+ grouparray[group2].length);
+            for (int i=0; i<grouparray[group2].length; i++) {
+                grouparray[group].Add(grouparray[group2].students[i].getName(), grouparray[group2].students[i].getSurname());
+                grouparray[group].setStudentMarks(i + grouparray[group].FilledUpTo() - 1, grouparray[group2].getStudentMarks(i));
+            }
+        } else System.out.println("Group ID error!");
     }
 
 
