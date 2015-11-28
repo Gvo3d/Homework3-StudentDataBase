@@ -1,6 +1,5 @@
 package App;
 
-import javax.xml.bind.SchemaOutputResolver;
 import java.util.Scanner;
 
 public class Application {
@@ -37,6 +36,7 @@ public class Application {
         System.out.println("\"a\"-add a student to a group");
         System.out.println("\"h\"-delete a student from a group");
         System.out.println("\"f\"-find a student from a group");
+        System.out.println("\"m\"-add marks for a student");
         System.out.println("\"n\"-create a group");
         System.out.println("\"c\"-clear a group");
         System.out.println("\"d\"-delete a group");
@@ -88,55 +88,36 @@ public class Application {
             case "q":
                 System.exit(0);
                 break;
+            case "m":
+                SetMarks();
+                break;
 
-
-            default: {
-            }
             }
         }
-
-        //Output
-//        if (!errthrow) System.out.println("Result is:" + result);
+    }
 
 
+//„` „~„p„t„u„„ƒ„ „‰„„„€ „~„y„{„„„€ „~„u „q„…„t„u„„ „‰„y„„„p„„„ „„„„… „r„„‚„r„y„s„|„p„x„~„…„ „‡#%„~„,
+//„„€„„„€„}„…-„‰„„„€ „}„~„u „ƒ„„„„t„~„€ „x„p „„„„€„„ „{„€„t.
 
-//        for (int i = 0; i<grouparray.length; i++) System.out.println(grouparray[i].groupId);
-//        System.out.println("Group "+grouparray[1].IdShow()+ " has "+grouparray[1].FilledUpTo()+ " students.");
-
-
-//    students.add( new Student("Denis", "Yakimov", 2) );
-//        students.add( new Student("Denis", "Volohov", 2) );
-//        students.add( new Student("Denis", "Kirilyk", 2) );
-//        students.add( new Student("Denis", "Bondar", 2) );
-//        students.add( new Student("Denis", "Chumachenko", 2) );
-//
-//
-//        for(Student str: students){
-//            System.out.println(str.getComparableSurname());
-//        }
-//
-//        for(int i=0; i< students.size(); i++) System.out.println(students.toArray()[i]);
-//
-//    }
-//
-//    public static void SortingStudents(){
-//        int arraylength = students.size();
-//        for (int i = 0; i < students.size()-1; i++){
-//            for (int j = 0; j<students.size() -i-1; j++){
-//                boolean comparingstudents = students.sort(students.a);
-//
-//
-//                if (a[j]<a[j+1]) {
-//                    bubble = a[j+1];
-//                    a[j+1]=a[j];
-//                    a[j]=bubble;
-//                }
-//            }
-//        }
-//
-//        for (int i=0; i<a.length; i++)
-//            System.out.println(a[i]);
-
+    private static void SetMarks() {
+        System.out.println("Input groupID, student surname, marks(up to 36)");
+        String number="";
+        int i=0;
+        int[] marks = new int[36];
+        int group = GetGroupID();
+        String surname = InputSurname();
+        while (!(number.equals("q"))) {
+            Scanner scanner = new Scanner(System.in);
+            if (scanner.hasNextInt()) {
+                marks[i]=scanner.nextInt();
+            }
+            number = scanner.nextLine();
+            i++;
+        }
+        if (grouparray[group].getStudentId(surname)!=0) {
+            grouparray[group].setStudentMarks(grouparray[group].getStudentId(surname), marks);
+        } else System.out.println("There is no student with such surname");
     }
 
     private static void GroupStudentsList() {

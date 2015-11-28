@@ -82,4 +82,13 @@ public class Group {
         return "";
     }
 
+    public int getStudentId (String surname) {
+        for (int i=1; i<students.length; i++) {
+            if (students[i].getSurname().equals(surname)) {
+                return i;
+            }
+        }
+        return 0;
+    }
+
 }
